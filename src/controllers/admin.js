@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import { logger } from "../../logger.js";
 import { decryptData } from "../../util/Data_protection.js";
 
-
 const key = process.env.KEY;
 
 import { Resend } from "resend";
@@ -89,8 +88,10 @@ export const verifyotp = async (req, res) => {
     }
 
     const db = mongoose.connection.db;
+    const admin = await db
+      .collection("login")
+      .findOne({ email });
 
-    const admin = await db.collection("admin").findOne({ email });
 
     if (!admin) {
       return res.status(404).json({ message: "Admin not found" });
@@ -202,17 +203,15 @@ export const AdminLogin = async (req, res) => {
     }
     const db = mongoose.connection.db;
 
+    const admin = db.collection("admin").findOne({ email });
 
-    const admin = db.collection("admin").findOne(email);
-
-    if(!admin){
-        return res.status(404).json({
-            message : "Invalid Username"
-        })
+    if (!admin) {
+      return res.status(404).json({
+        message: "Invalid Username",
+      });
     }
 
-    const otp = sendotp(email);
-
+    const otp = await sendotp(email);
 
     await db.collection("login").insertOne({
       email,
@@ -221,7 +220,7 @@ export const AdminLogin = async (req, res) => {
     });
 
     return res.status(200).json({
-      message: "Login successful",
+      message: `Otp sent to ${email}`,
     });
   } catch (error) {
     logger.error(`Login failed: ${error.message}`);
