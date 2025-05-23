@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { logger } from "../../logger.js";
+import { decryptData } from "../../util/Data_protection.js";
 
 
 const key = process.env.KEY;
@@ -188,9 +189,9 @@ export const verifyotp = async (req, res) => {
 
 export const AdminLogin = async (req, res) => {
   try {
-    const encrpteddata = decryptData(req.body, key);
+    const decrpteddata = decryptData(req.body, key);
 
-    const { email } = encrpteddata;
+    const { email } = decrpteddata;
 
     // Validate required fields
     if (!email) {
