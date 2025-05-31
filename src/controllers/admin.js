@@ -88,10 +88,7 @@ export const verifyotp = async (req, res) => {
     }
 
     const db = mongoose.connection.db;
-    const admin = await db
-      .collection("login")
-      .findOne({ email });
-
+    const admin = await db.collection("login").findOne({ email });
 
     if (!admin) {
       return res.status(404).json({ message: "Admin not found" });
@@ -188,6 +185,7 @@ export const verifyotp = async (req, res) => {
 
 // Login function
 
+
 export const AdminLogin = async (req, res) => {
   try {
     const decrpteddata = decryptData(req.body, key);
@@ -203,7 +201,8 @@ export const AdminLogin = async (req, res) => {
     }
     const db = mongoose.connection.db;
 
-    const admin = db.collection("admin").findOne({ email });
+    // Fix: Add await to the findOne query
+    const admin = await db.collection("admin").findOne({ email });
 
     if (!admin) {
       return res.status(404).json({
@@ -213,11 +212,18 @@ export const AdminLogin = async (req, res) => {
 
     const otp = await sendotp(email);
 
-    await db.collection("login").insertOne({
-      email,
-      otp,
-      otpGeneratedAt: new Date(),
-    });
+    // Fix: Use upsert to update existing record or create new one
+    await db.collection("login").updateOne(
+      { email }, // filter
+      {
+        $set: {
+          email,
+          otp,
+          otpGeneratedAt: new Date(),
+        },
+      },
+      { upsert: true } // creates new document if none exists
+    );
 
     return res.status(200).json({
       message: `Otp sent to ${email}`,
