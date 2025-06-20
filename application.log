@@ -23,3 +23,19 @@
 {"level":"info","message":"Client updated successfully with ID: 100001","timestamp":"2025-05-28T11:43:08.973Z"}
 {"level":"info","message":"Client updated successfully with ID: 100001","timestamp":"2025-05-28T11:43:23.453Z"}
 {"level":"info","message":"Client updated successfully with ID: 100001","timestamp":"2025-05-28T11:43:38.681Z"}
+{"level":"info","message":"New client added with ID: 100001","timestamp":"2025-06-16T05:45:26.305Z"}
+{"level":"info","message":"New client added with ID: 100002","timestamp":"2025-06-16T05:47:45.805Z"}
+{"level":"info","message":"Client updated successfully with ID: 100001","timestamp":"2025-06-16T05:48:10.409Z"}
+{"level":"info","message":"New client added with ID: 100001","timestamp":"2025-06-16T05:58:56.755Z"}
+{"level":"info","message":"New client added with ID: 100002","timestamp":"2025-06-16T05:59:39.416Z"}
+{"level":"info","message":"Client updated successfully with ID: 100001","timestamp":"2025-06-16T05:59:54.201Z"}
+{"level":"error","message":"Error adding client: db.useDb is not a function","stack":"TypeError: db.useDb is not a function\n    at AddClient (file:///D:/Company/trexsoftware/trexserver/src/controllers/client.js:58:25)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2025-06-16T06:24:39.010Z"}
+{"level":"error","message":"Another Client is Registered with this email","timestamp":"2025-06-16T06:25:03.341Z"}
+{"level":"error","message":"Another Client is Registered with this email","timestamp":"2025-06-16T06:25:24.556Z"}
+{"level":"error","message":"Another Client is Registered with this email","timestamp":"2025-06-16T06:26:08.335Z"}
+{"level":"info","message":"New client added with ID: 100001","timestamp":"2025-06-16T06:30:26.521Z"}
+{"level":"info","message":"New client added with ID: 100001","timestamp":"2025-06-16T06:33:24.524Z"}
+{"level":"info","message":"New client added with ID: 100001","timestamp":"2025-06-16T06:58:05.506Z"}
+{"level":"info","message":"New client added with ID: 100001","timestamp":"2025-06-16T07:05:21.252Z"}
+{"level":"info","message":"New client added with ID: 100001","timestamp":"2025-06-16T07:37:46.875Z"}
+{"level":"info","message":"New client added with ID: 100002","timestamp":"2025-06-18T07:04:06.272Z"}

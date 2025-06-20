@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { logger } from "../../logger.js";
+import { encryptData } from "../../util/Data_protection.js";
 
 export const AddClient = async (req, res) => {
   try {
@@ -12,10 +13,10 @@ export const AddClient = async (req, res) => {
       });
     }
 
-    const db = mongoose.connection.db;
+    const db = mongoose.connection;
 
     const checkclient = await db
-      .collection("cmsclients")
+      .collection("clients")
       .findOne({ email: data.email });
 
     if (checkclient) {
@@ -28,7 +29,7 @@ export const AddClient = async (req, res) => {
     data.admin_id = data.email;
 
     // Generate client_id by finding the last client and incrementing
-    const lastClient = await db.collection("cmsclients").findOne(
+    const lastClient = await db.collection("clients").findOne(
       {},
       {
         sort: { client_id: -1 },
@@ -38,10 +39,10 @@ export const AddClient = async (req, res) => {
 
     let client_id;
     if (lastClient && lastClient.client_id) {
-      // If there are existing cmsclients, increment the last client_id
+      // If there are existing clients, increment the last client_id
       client_id = parseInt(lastClient.client_id) + 1;
     } else {
-      // If no cmsclients exist, start with 100001
+      // If no clients exist, start with 100001
       client_id = 100001;
     }
 
@@ -52,7 +53,16 @@ export const AddClient = async (req, res) => {
     data.createdAt = new Date();
 
     // Insert the new client
-    const result = await db.collection("cmsclients").insertOne(data);
+    const result = await db.collection("clients").insertOne(data);
+
+    // Switch to the client-specific database
+    const clientDb = db.useDb(data.dbname, { useCache: true });
+
+    await clientDb.collection("admin").insertOne({
+      email: data.email,
+      password: encryptData("123456", process.env.KEY),
+      rank: "1",
+    });
 
     if (result.insertedId) {
       logger.info(`New client added with ID: ${client_id}`);
@@ -90,7 +100,7 @@ export const UpdateClient = async (req, res) => {
 
     // Find the existing client
     const existingClient = await db
-      .collection("cmsclients")
+      .collection("clients")
       .findOne({ client_id: parseInt(clientId) });
 
     if (!existingClient) {
@@ -102,7 +112,7 @@ export const UpdateClient = async (req, res) => {
 
     // If email is being updated, check if another client already has this email
     if (data.email && data.email !== existingClient.email) {
-      const checkclient = await db.collection("cmsclients").findOne({
+      const checkclient = await db.collection("clients").findOne({
         email: data.email,
         client_id: { $ne: parseInt(clientId) }, // Exclude current client
       });
@@ -178,7 +188,7 @@ export const UpdateClient = async (req, res) => {
 
     // Update the client
     const result = await db
-      .collection("cmsclients")
+      .collection("clients")
       .updateOne({ client_id: parseInt(clientId) }, { $set: updateData });
 
     if (result.matchedCount === 0) {
@@ -198,7 +208,7 @@ export const UpdateClient = async (req, res) => {
 
     // Get the updated client data
     const updatedClient = await db
-      .collection("cmsclients")
+      .collection("clients")
       .findOne({ client_id: parseInt(clientId) });
 
     logger.info(`Client updated successfully with ID: ${clientId}`);
@@ -221,9 +231,9 @@ export const UpdateClient = async (req, res) => {
 
 export const getcmsclients = async (req, res) => {
   try {
-    const db = mongoose.connection.db;
+    const db = mongoose.connection;
 
-    const clients = await db.collection("cmsclients").find({}).toArray();
+    const clients = await db.collection("clients").find({}).toArray();
 
     if (clients?.length < 0) {
       logger.error("No clients Found");
