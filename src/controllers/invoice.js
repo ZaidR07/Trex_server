@@ -293,8 +293,8 @@ export const generateInvoice = async (req, res) => {
                                         : ''
                                 }
                                     </td>
-                                    <td class="text-right">$${parseFloat(service.price).toFixed(2)}</td>
-                                    <td class="text-right">$${parseFloat(service.price).toFixed(2)}</td>
+                                    <td class="text-right">${parseFloat(service.price).toFixed(2)}</td>
+                                    <td class="text-right">${parseFloat(service.price).toFixed(2)}</td>
                                 </tr>
                             `).join('')}
                         </tbody>
@@ -303,16 +303,16 @@ export const generateInvoice = async (req, res) => {
                     <div class="totals">
                         <div class="total-row final">
                             <span>Total:</span>
-                            <span>$${total.toFixed(2)}</span>
+                            <span>${total.toFixed(2)}</span>
                         </div>
                         ${payload.paidAmount > 0 ? `
                             <div class="total-row">
                                 <span>Paid Amount:</span>
-                                <span style="color: #22c55e;">-$${parseFloat(payload.paidAmount).toFixed(2)}</span>
+                                <span style="color: #22c55e;">-${parseFloat(payload.paidAmount).toFixed(2)}</span>
                             </div>
                             <div class="total-row final" style="color: #2563eb;">
                                 <span>Remaining Due:</span>
-                                <span>$${remainingAmount.toFixed(2)}</span>
+                                <span>${remainingAmount.toFixed(2)}</span>
                             </div>
                         ` : ''}
                     </div>
@@ -323,7 +323,7 @@ export const generateInvoice = async (req, res) => {
                                 ${payload.paymentMethod === 'bank_transfer' ? 'Bank Transfer' :
                 payload.paymentMethod === 'credit_card' ? 'Credit Card' :
                     payload.paymentMethod === 'cash' ? 'Cash' :
-                        payload.paymentMethod === 'paypal' ? 'PayPal' : 'Other'}
+                        payload.paymentMethod === 'upi' ? 'UPI' : 'Other'}
                             
                                     ${payload.paymentMethod === 'bank_transfer' ? `                             
                             ` : ''}
