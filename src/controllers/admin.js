@@ -52,7 +52,7 @@ export const adduser = async (req, res) => {
     const userid = generateUserId();
 
     const existingUser = await db.collection("users").findOne({
-      $or: [{ email: email }, { mobile: mobile }],
+      $or: [{ email : email }, { mobile: mobile }],
     });
 
     if (existingUser) {
@@ -184,8 +184,6 @@ export const verifyotp = async (req, res) => {
 // };
 
 // Login function
-
-
 export const AdminLogin = async (req, res) => {
   try {
     const decrpteddata = decryptData(req.body, key);
@@ -202,7 +200,7 @@ export const AdminLogin = async (req, res) => {
     const db = mongoose.connection.db;
 
     // Fix: Add await to the findOne query
-    const admin = await db.collection("admin").findOne({ email });
+    const admin = await db.collection("admin").findOne({ email : email });
 
     if (!admin) {
       return res.status(404).json({
@@ -214,10 +212,10 @@ export const AdminLogin = async (req, res) => {
 
     // Fix: Use upsert to update existing record or create new one
     await db.collection("login").updateOne(
-      { email }, // filter
+      { email : email }, // filter
       {
         $set: {
-          email,
+          email :  email,
           otp,
           otpGeneratedAt: new Date(),
         },

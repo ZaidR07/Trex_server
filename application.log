@@ -39,6 +39,7 @@
 {"level":"info","message":"New client added with ID: 100001","timestamp":"2025-06-16T07:05:21.252Z"}
 {"level":"info","message":"New client added with ID: 100001","timestamp":"2025-06-16T07:37:46.875Z"}
 {"level":"info","message":"New client added with ID: 100002","timestamp":"2025-06-18T07:04:06.272Z"}
+<<<<<<< Updated upstream
 {"level":"error","message":"Error adding client: encryptData is not defined","stack":"ReferenceError: encryptData is not defined\n    at AddGstInvoiceClient (file:///C:/Coding/t-rex%20software/Trex_server/src/controllers/gstinvoiceclient.js:66:17)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)","timestamp":"2025-06-21T11:16:58.359Z"}
 {"level":"info","message":"New client added with ID: 100002","timestamp":"2025-06-21T11:20:47.700Z"}
 {"code":73,"codeName":"InvalidNamespace","errorLabelSet":{},"errorResponse":{"code":73,"codeName":"InvalidNamespace","errmsg":"Invalid namespace specified 'aqsa .admin'","ok":0},"level":"error","message":"Error adding client: Invalid namespace specified 'aqsa .admin'","ok":0,"stack":"MongoServerError: Invalid namespace specified 'aqsa .admin'\n    at Connection.sendCommand (C:\\Coding\\t-rex software\\Trex_server\\node_modules\\mongodb\\lib\\cmap\\connection.js:299:27)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async Connection.command (C:\\Coding\\t-rex software\\Trex_server\\node_modules\\mongodb\\lib\\cmap\\connection.js:327:26)\n    at async Server.command (C:\\Coding\\t-rex software\\Trex_server\\node_modules\\mongodb\\lib\\sdam\\server.js:168:29)\n    at async InsertOneOperation.executeCommand (C:\\Coding\\t-rex software\\Trex_server\\node_modules\\mongodb\\lib\\operations\\command.js:76:16)\n    at async InsertOneOperation.execute (C:\\Coding\\t-rex software\\Trex_server\\node_modules\\mongodb\\lib\\operations\\insert.js:37:16)\n    at async InsertOneOperation.execute (C:\\Coding\\t-rex software\\Trex_server\\node_modules\\mongodb\\lib\\operations\\insert.js:46:21)\n    at async tryOperation (C:\\Coding\\t-rex software\\Trex_server\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:207:20)\n    at async executeOperation (C:\\Coding\\t-rex software\\Trex_server\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:75:16)\n    at async Collection.insertOne (C:\\Coding\\t-rex software\\Trex_server\\node_modules\\mongodb\\lib\\collection.js:157:16)","timestamp":"2025-06-21T11:22:43.793Z"}
@@ -58,3 +59,10 @@
 {"level":"info","message":"Client updated with ID: 100001","timestamp":"2025-06-21T11:58:52.950Z"}
 {"level":"info","message":"Client added with ID: 100002","timestamp":"2025-06-21T11:59:48.119Z"}
 {"level":"info","message":"Client added with ID: 100003","timestamp":"2025-06-21T12:01:08.336Z"}
+=======
+{"level":"info","message":"New client added with ID: 100003","timestamp":"2025-06-26T06:36:27.561Z"}
+{"level":"info","message":"New client added with ID: 100004","timestamp":"2025-07-05T13:50:11.388Z"}
+{"level":"info","message":"New client added with ID: 100004","timestamp":"2025-07-05T13:58:01.985Z"}
+{"level":"info","message":"New client added with ID: 100004","timestamp":"2025-07-05T14:09:32.630Z"}
+{"level":"info","message":"New client added with ID: 100001","timestamp":"2025-07-07T05:42:15.939Z"}
+>>>>>>> Stashed changes

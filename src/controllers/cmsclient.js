@@ -59,7 +59,7 @@ export const AddClient = async (req, res) => {
     const clientDb = db.useDb(data.dbname, { useCache: true });
 
     await clientDb.collection("admin").insertOne({
-      email: data.email,
+      admin_id : data.email,
       password: encryptData("123456", process.env.KEY),
       rank: "1",
     });
